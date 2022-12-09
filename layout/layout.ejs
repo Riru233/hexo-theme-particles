@@ -1,0 +1,280 @@
+<% var pageTitle=config.title+'♥'
+    if(page.title) pageTitle+=page.title;
+    else if(is_category()) pageTitle+="分类:"+page.category;
+    else if(is_tag()) pageTitle+="标签:"+page.tag;
+    else if(is_home()) pageTitle+="主站";
+    else if(is_archive()) pageTitle+="归档";
+    else if(page.show=="categories") pageTitle+="分类";
+    else if(page.show=="tags") pageTitle+="标签";
+    else if(page.show=="update") pageTitle+="网站版本为:CirCle S "+theme.cisver+"，网站的代号是:"+theme.code+"网站架构更新于:"+theme.udate;
+    else if(page.show=="about") pageTitle+="关于CirCle S";
+    else if(page.show=="ui") pageTitle+=page.ptitle;
+    else pageTitle+=config.subtitle;
+    var layout = "index"
+    if(is_home()){
+    layout = "index"
+    }else if(is_post()){
+    layout = "post"
+    }else if(is_category() || page.show=="categories"){
+    layout = "categories"
+    }else if(is_tag() || page.show=="tags"){
+    layout = "tags"
+    }else if(page.show=="update"){
+    layout = "update"
+    }else if(page.show=="about"){
+    layout = "about"
+    }else if(is_archive() || is_year() || is_month()){
+    layout = "archives"
+    }else {
+    layout = "ui"
+    }
+    var rootlink = config.root
+    site.posts.data.sort(function(a, b){
+    return b.date - a.date;
+    })
+    %>
+    <!DOCTYPE html>
+    <html lang="<%- config.language %> ">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>
+            <%= pageTitle %>
+        </title>
+        <meta name="author" content="<%- config.author %>">
+        <meta name="description" content="<%- config.description %> ">
+        <meta name="keywords" content="<%- config.keywords %> ">
+        <link rel="icon" href="<%- theme.cirs_img %>">
+        <!--转场动画-->
+        <% if(theme.trans.enable){ %>
+            <style> 
+                #main { 
+                    animation: SlideInAnimation ease 0.3s; 
+                    transition: all 0.3s ease-in-out;
+                } 
+                #themechg {
+                    animation: ThemeAnimation ease 0.3s;
+                    transition: all 0.3s ease-in-out;
+                }
+                @keyframes SlideInAnimation { 
+                    0% { 
+                        opacity: 0;
+                        transform: translate3d(100px,0,0);
+                    } 
+                    100% { 
+                        opacity: 1;
+                        transform: translate3d(0,0,0);
+                    } 
+                }
+                @keyframes ThemeAnimation { 
+                    0% { 
+                        opacity: 0;
+                    } 
+                    100% { 
+                        opacity: 1;
+                    } 
+                }
+            </style>
+        <% } %>
+        <!--aplayer全局刷新-->
+        <link rel="stylesheet" href="<%- rootlink %>libs/aplayer/APlayer.min.css">
+
+        <!--jquery-->
+        <link rel="stylesheet" href="<%- rootlink %>dist/jquery.rippleria.min.css">
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="<%- rootlink %>dist/jquery.rippleria.min.js"></script>
+
+        <!--导入Pjax-->
+        <script data-pjax src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+
+        <!--导入lazyload-->
+        <script src="https://cdn.bootcdn.net/ajax/libs/Cuckoo/2.0.2/js/lazyload.min.js"></script>
+
+        <!--materialize-->
+        <link href="https://cdn.bootcdn.net/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+        <script data-pjax src="https://cdn.bootcdn.net/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+        <!--导入vue3-->
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    </head>
+
+    <body class="scrollbar" style="transition: all 0.5s ease-in-out;">
+        <div id="themestyle">
+            <link rel="stylesheet" href="<%- rootlink %>css/<%=theme.pattern.default%>-theme.css">
+        </div>
+        <!-- 等待页面块 -->
+        
+        <% var tip = ['听说等待过程中敲木鱼的话功德会升高哦','咕咕咕',"time.sleep(<span style='color:blue'>10</span>) <span style='color:rgb(58, 104, 77)'>#项目经理要求这里运行缓慢，好让客户给钱优化</span>",'为了更流畅地体验本站，请打开硬件加速','加载过慢请开启缓存(浏览器默认开启)']
+            var num1 = Math.floor(Math.random()*tip.length);
+        %>
+        <div id="loading" style="height: 100%; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;z-index: 1999;">
+            <span style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;font-weight: lighter;">
+                <div id="loadcontent" style="padding:50px;display:flex;opacity:1;transition:opacity 1s ease-out;">
+                    <div>
+                        <img src="https://pic.imgdb.cn/item/637fafc016f2c2beb1ab8ab8.gif" alt="loading">
+                    </div>
+                </div>
+            </span>
+            <span style="position: fixed;left: 20px;bottom: 0;font-size: 15px;">
+                <div id="loadcontent" style="padding:20px;border-radius:50%;display:flex;text-align:left;opacity:1;transition:opacity 1s ease-out;">
+                    <div>
+                        <div>
+                            <p>🙂 Tip: <%- tip[num1] %></p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            <span style="position: fixed; right: 20px;bottom: 0;font-size: 15px;">
+                <div id="loadcontent" style="padding:20px;border-radius:50%;display:flex;text-align:right;opacity:1;transition:opacity 1s ease-out;">
+                    <div>
+                        <div id="loaduni">
+                            <p>正在火速加载中，请稍候...</p>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+
+        <!--主题切换块-->
+        <div id="themechg" style="visibility: hidden;height: 100%; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;z-index: 1999;">
+            <span style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;font-weight: lighter;">
+                <div id="loadcontent" style="font-size:30px;padding:50px;display:flex;opacity:1;transition:opacity 1s ease-out;">
+                    <div id="confont">
+                        <p>切换样式中，请稍候...</p>
+                    </div>
+                </div>
+            </span>
+        </div>
+
+
+        <!-- 主界面块 -->
+        <div id="layout">
+            <% if(theme.trans.enable){ %>
+            <transition name="into">
+                <% } %>
+                <div v-show="showpage" style="display: -not-none;">
+                    <div class="loading-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div id="menushow">
+                        <%- include("_partial/menu") %>
+                    </div>
+                    <%- partial('_partial/pop') %>
+                    <div id="main">
+                        <%- include(layout) %>
+                        <%- include("_partial/footer") %>
+                    </div>
+                </div>
+                <% if(theme.trans.enable){ %>
+            </transition>
+            <% } %>
+        </div>
+
+        <!-- 功能按钮块 -->
+        <div id="layout2" style="transition: all 9s;">
+            <%- include("_partial/phoncard") %>
+            <%- include("_partial/aplayer") %>
+        </div>
+
+        <!-- 加插件 -->
+        <%- include("script") %>
+
+        <script src="<%- rootlink %>js/matery.js"></script>
+        
+        <script data-pjax src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+        <script data-pjax src="<%- rootlink %>js/particle.js"></script>
+        
+        <!-- Pjax内核 -->
+        <script>
+            /* Pjax加载 */
+                var pjax = new Pjax({
+                // 这里填写页面中改变的部分（和 CSS 选择器用法一样）
+                    selectors: ["head title", "#main"],
+                });
+            /* Pjax重载js文件 */
+                $("script[data-pjax], .pjax-reload script").each(function () {
+                    $(this).parent().append($(this).remove());
+                });
+            /* pjax加载时的进度条 */
+                var loadingBar = document.querySelector(".loading-bar");
+                var progress = document.querySelector(".loading-bar .progress");
+                var timer = null;
+
+                // Pjax 开始时执行的函数
+                document.addEventListener("pjax:send", function () {
+                // 进度条默认已经加载 20%
+                var loadingBarWidth = 20;
+                // 进度条的最大增加宽度
+                var MAX_LOADING_WIDTH = 95;
+
+                // 显示进度条
+                loadingBar.classList.add("loading");
+                // 初始化进度条的宽度
+                progress.style.width = loadingBarWidth + "%";
+
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    // 进度条的增加速度（可以改为一个随机值，显得更加真实）
+                    loadingBarWidth += 3;
+
+                    // 当进度条到达 95% 后停止增加
+                    if (loadingBarWidth > MAX_LOADING_WIDTH) {
+                    loadingBarWidth = MAX_LOADING_WIDTH;
+                    }
+
+                    progress.style.width = loadingBarWidth + "%";
+                }, 500);
+                });
+
+                // Pjax 完成之后执行的函数
+                document.addEventListener("pjax:complete", function () {
+                clearInterval(timer);
+                progress.style.width = "100%";
+                loadingBar.classList.remove("loading");
+
+                setTimeout(function () {
+                    progress.style.width = 0;
+                }, 400);
+                });
+        </script>
+        <!-- 主题切换模块 -->
+        <script>
+            //主题显示
+            //定义显示函数
+            function displaynone() {
+                document.querySelector("#confont").setAttribute("style", "");
+                document.querySelector("#layout").setAttribute("style", "display: none");
+                document.querySelector("#layout2").setAttribute("style", "display: none");
+                document.querySelector("#themechg").setAttribute("style", "height: 100%; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;z-index: 1999;");
+            };
+            function displayreturn() {
+                setTimeout(function () {
+                    document.querySelector("#confont").setAttribute("style", "visibility: hidden");
+                    document.querySelector("#layout").setAttribute("style", "");
+                    document.querySelector("#layout2").setAttribute("style", "");
+                    document.querySelector("#themechg").setAttribute("style", "visibility: hidden");
+                }, 1500)
+            };
+                    
+            //调用函数
+            document.querySelector("#thememaiden").onclick = function (e) {   //展示
+                displaynone();
+                document.querySelector("#themestyle").innerHTML = "<link rel='stylesheet' href='<%- rootlink %>css/maiden-theme.css'>";
+                displayreturn();
+            };
+            document.querySelector("#themenight").onclick = function (e) {   //展示
+                displaynone();
+                document.querySelector("#themestyle").innerHTML = "<link rel='stylesheet' href='<%- rootlink %>css/night-theme.css'>";
+                displayreturn();
+            };
+            document.querySelector("#themefull").onclick = function (e) {   //展示
+                displaynone();
+                document.querySelector("#themestyle").innerHTML = "<link rel='stylesheet' href='<%- rootlink %>css/full-theme.css'>";
+                displayreturn();
+            };
+        </script>
+
+    </body>
+</html>

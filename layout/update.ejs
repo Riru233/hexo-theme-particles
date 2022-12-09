@@ -1,0 +1,52 @@
+<% var rootlink=config.root %>
+<div id="fancycard" class="quickcard btncard-hide" style="position: fixed;z-index: 999;">
+    <%- include("_partial/card") %>
+</div>
+    <link rel="stylesheet" href="<%- rootlink %>css/post-body.css">
+    <div class="article" style="top: 135px;">
+        <a class="back waves-effect waves-light tooltipped" onclick="javascript:history.back(-1);" data-position="right" data-tooltip="返回上一层">
+            <svg viewBox="32 32 896 896" focusable="false" data-icon="left" width="2em" height="2em" fill="currentColor"
+                aria-hidden="false">
+                <path
+                    d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z" />
+            </svg>
+        </a>
+
+        <div class="page_title">Particle S <%- theme.cisver %> 特性介绍:
+        </div>
+        <div class="uico waves-effect waves-light" style="background-color: #35bc0083;" onclick="M.toast({html: 'Nico,Nico,Niiiiiii~', classes: 'rounded xtoast'})">
+            <div class="co_main" style="color: #ffffff;">Particle S <%- theme.cisver %>代号</div>
+            <div class="co_sub" style="color: #ffffff;">Nico</div>
+        </div>
+
+        <div class="uico waves-effect waves-light" style="background-color: #02a8c283;">
+            <div class="co_main" style="color: #ffffff;">有关LTS版</div>
+            <div class="co_sub" style="color: #ffffff;">由于本主题更新周期变长，故Release版转向LTS版，即长期维护版</div>
+        </div>
+
+        <div class="uico waves-effect waves-light" style="background-color: #0c807483;">
+            <div class="co_main" style="color: #ffffff;">全新Vue 3</div>
+            <div class="co_sub" style="color: #ffffff;">Particle S将代码库更为Vue 3，维护更大</div>
+        </div>
+
+        <div class="uico waves-effect waves-light" style="background-color: #0073ff83;">
+            <div class="co_main" style="color: #ffffff;">全新主题Particle S</div>
+            <div class="co_sub" style="color: #ffffff;">经历三个版本的大更新，基于Particle大量优化的主题:Particle S带来了超快的打开速度，更好的UI动画</div>
+            <div class="co_sub" style="color: #ffffff;">为何叫Particle S？因为以前曾经将其起名为CirCle S #1，参考Particle X的案例，主题基本是Particle的风格，而工作室名字是CirCle S，因此，Particle S主题就诞生了</div>
+        </div>
+
+        <div class="uico waves-effect waves-light" style="background-color: #ff910083;">
+            <div class="co_main" style="color: #ffffff;">此页采用Pjax技术</div>
+            <div class="co_sub" style="color: #ffffff;">无刷新加载(注:由于Pjax的bug，进入博客文章时会重新加载一遍)</div>
+        </div>
+
+        <div class="uico waves-effect waves-light" style="background-color: #ff220083;">
+            <div class="co_main" style="color: #ffffff;">基于Materialize</div>
+            <div class="co_sub" style="color: #ffffff;">Particle S直接抛弃原有的antd设计，采用materialize设计，带来了搜索框、主题切换等多彩功能</div>
+        </div>
+
+        <div class="uico waves-effect waves-light" style="background-color: #ca789f83;">
+            <div class="co_main" style="color: #ffffff;">多样的动画</div>
+            <div class="co_sub" style="color: #ffffff;">Particle S新增多种转场效果，一般网速都能够流畅加载，让你告别等待</div>
+        </div>
+    </div>

@@ -1,0 +1,82 @@
+<% var rootlink=config.root %>
+<div id="menu">
+    <div class="desktop-menu">
+        <div style="position: absolute;">
+            <!--主站-->
+            <a href="<%- rootlink %>">
+                <span class="title">
+                    <%- config.title %>
+                </span>
+            </a>
+
+            <!--进入各个入口-->
+            <% Object.keys(theme.menu).forEach(key=> { %>
+            <a href="<%=theme.menu[key].src%>">
+                <span>
+                    <%=key%>
+                </span>
+            </a>
+            <% }); %>
+        </div>
+
+        <div style="position: absolute;right:0;padding-right: 10px;">
+            <a href="#modal1" class="modal-trigger tooltipped" data-position="bottom" data-tooltip="切换样式">
+                <div style="min-width:20px; max-width:50px; width: 10%">
+                    <i>
+                        <svg viewBox="64 64 896 896" data-icon="highlight" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
+                            <path d="M957.6 507.4L603.2 158.2a7.9 7.9 0 0 0-11.2 0L353.3 393.4a8.03 8.03 0 0 0-.1 11.3l.1.1 40 39.4-117.2 115.3a8.03 8.03 0 0 0-.1 11.3l.1.1 39.5 38.9-189.1 187H72.1c-4.4 0-8.1 3.6-8.1 8V860c0 4.4 3.6 8 8 8h344.9c2.1 0 4.1-.8 5.6-2.3l76.1-75.6 40.4 39.8a7.9 7.9 0 0 0 11.2 0l117.1-115.6 40.1 39.5a7.9 7.9 0 0 0 11.2 0l238.7-235.2c3.4-3 3.4-8 .3-11.2zM389.8 796.2H229.6l134.4-133 80.1 78.9-54.3 54.1zm154.8-62.1L373.2 565.2l68.6-67.6 171.4 168.9-68.6 67.6zM713.1 658L450.3 399.1 597.6 254l262.8 259-147.3 145z" />
+                        </svg>
+                    </i>
+                </div>
+            </a>
+            
+            <a href="#searchModal" class="modal-trigger tooltipped" data-position="bottom" data-tooltip="搜索">
+                <div style="min-width:20px; max-width:50px; width: 10%">
+                    <i>
+                        <svg viewBox="64 64 896 896" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z" />
+                        </svg>
+                    </i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div :class="'phone-menu ' + menushow" id="phone-menu">
+        <div :class="'title'">
+            <span style="margin-right: 10px;position:absolute;left:30px;cursor: pointer;" @click="menushow=!menushow">
+                <i aria-label="icon: menu" class="anticon anticon-menu"><svg viewBox="64 64 896 896" data-icon="menu" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path></svg></i>
+            </span>
+
+            <span>
+                <%- config.title %>
+            </span>
+
+            <span style="position: absolute;right:0;padding-right: 70px;" class="tooltipped" data-position="bottom" data-tooltip="切换样式">
+                <span href="#modal1" class="modal-trigger">
+                    <i>
+                        <svg viewBox="64 64 896 896" data-icon="highlight" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+                            <path d="M957.6 507.4L603.2 158.2a7.9 7.9 0 0 0-11.2 0L353.3 393.4a8.03 8.03 0 0 0-.1 11.3l.1.1 40 39.4-117.2 115.3a8.03 8.03 0 0 0-.1 11.3l.1.1 39.5 38.9-189.1 187H72.1c-4.4 0-8.1 3.6-8.1 8V860c0 4.4 3.6 8 8 8h344.9c2.1 0 4.1-.8 5.6-2.3l76.1-75.6 40.4 39.8a7.9 7.9 0 0 0 11.2 0l117.1-115.6 40.1 39.5a7.9 7.9 0 0 0 11.2 0l238.7-235.2c3.4-3 3.4-8 .3-11.2zM389.8 796.2H229.6l134.4-133 80.1 78.9-54.3 54.1zm154.8-62.1L373.2 565.2l68.6-67.6 171.4 168.9-68.6 67.6zM713.1 658L450.3 399.1 597.6 254l262.8 259-147.3 145z" />
+                        </svg>
+                    </i>
+                </span>
+            </span>
+
+            <span style="position: absolute;right:0;padding-right: 30px;" class="tooltipped" data-position="bottom" data-tooltip="搜索">
+                <span href="#searchModal" class="modal-trigger">
+                    <i><svg viewBox="64 64 896 896" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></i>
+                </span>
+            </span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="menushow" style="display: none;">
+                <% Object.keys(theme.menu).forEach(key => { %>
+                <a href="<%= url_for(theme.menu[key].src) %>">
+                    <div class="item" @click="menushow=!menushow">
+                        <div style="min-width: 100px; max-width: 150%; width: 20%"><%= key %></div>
+                    </div>
+                </a>
+                <% }); %>
+            </div>
+        </transition>
+    </div>
+</div>

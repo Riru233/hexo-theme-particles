@@ -1,0 +1,110 @@
+<% var rootlink = config.root %> 
+<div id="fancycard" class="quickcard btncard-hide" style="position: fixed;z-index: 999;">
+    <%- include("_partial/card") %>
+</div>
+    <!--指定标题-->
+        <div class="article" style="top: 135px;">
+        <a class="back waves-effect waves-light tooltipped" onclick="javascript:history.back(-1);" data-position="right" data-tooltip="返回上一层">
+            <svg viewBox="32 32 896 896" focusable="false" data-icon="left" width="2em" height="2em"
+                fill="currentColor" aria-hidden="false">
+                <path
+                    d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z" />
+            </svg>
+        </a>
+        <div class="page_title">
+            分类
+        </div>
+
+        </div>
+<div id="cat" class="categories-tags">
+    <!--指定分类内容-->
+    <% var posts = [];%>
+    <div class="all-s">
+        <% site.categories.data.forEach(function(category){ %>
+        <% 
+            if(theme.style == "night"){
+                var color = ['background:#607d8b', 'background:#6484be', 'background:#006674','background:#016a99']
+                if(is_category(category.name)){
+                var color = ['background:#24292e']
+                }
+            }else if(theme.style == "maiden"){
+                var color = ['background:#ffa2c4', 'background:#00bcd4', 'background:#879cff', 'background:#1bccbc', 'background:#ff7d73'];
+                if(is_category(category.name)){
+                var color = ["'background:linear-gradient(to right, #fbc2eb 0%, #bbd4ff 100%)'"]
+                }
+            }else{
+                var color = ['background:#ffa2c4', 'background:#00bcd4', 'background:#03a9f4', 'background:#00a596', 'background:#ff7d73'];
+                if(is_category(category.name)){
+                var color = ["'background:linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)'"]
+                }
+            }
+            
+            var num = Math.floor(Math.random()*color.length);
+        %>
+        <span style="margin: 30px">
+            <a id="categories" href="<%- rootlink %><%- category.path %>#archives" style="<%- color[num] %>;padding:20px 40px;font-size: 18px;border-radius: 10px;">
+                <span class="icon">
+                    <i aria-label="icon: book" class="anticon anticon-book"><svg viewBox="64 64 896 896" data-icon="book" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M832 64H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-260 72h96v209.9L621.5 312 572 347.4V136zm220 752H232V136h280v296.9c0 3.3 1 6.6 3 9.3a15.9 15.9 0 0 0 22.3 3.7l83.8-59.9 81.4 59.4c2.7 2 6 3.1 9.4 3.1 8.8 0 16-7.2 16-16V136h64v752z"></path></svg></i></span>
+                <%- category.name %>
+            </a>
+        </span>
+        <% if(is_category(category.name)){posts = category.posts} %>
+        <% }) %>
+    </div>
+
+    <div id="archives" style="min-height: 100vh;display: block;">
+        <div class="page_title" style=""><%- page.category %></div>
+        <% posts.forEach(function(post){ %>
+                    <div hoverable class="uico" style="background-image: url('<%- page.bgpath %><%- post.bgpath %>');padding:0;border:0px">
+                        <div class="linear" style="height:100%;width:100%;border-radius: 20px;padding:20px;">
+                        <a onclick="window.location.href='<%- rootlink %><%- post.path %>'" style="cursor: pointer">
+                            <h2><%= post.title %></h2>
+                        </a>
+                        <div class="info">
+                            <div class="category-and-date">
+                                <% if(post.categories && post.categories.data.length!=0){ %>
+                                <span class="category">
+                                    <a href="<%- rootlink %>categories/<%= post.categories.data[0].name.replace(" ", "-") %>">
+                                        <span class="icon"><i aria-label="icon: book" class="anticon anticon-book"><svg viewBox="64 64 896 896" data-icon="book" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M832 64H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V96c0-17.7-14.3-32-32-32zm-260 72h96v209.9L621.5 312 572 347.4V136zm220 752H232V136h280v296.9c0 3.3 1 6.6 3 9.3a15.9 15.9 0 0 0 22.3 3.7l83.8-59.9 81.4 59.4c2.7 2 6 3.1 9.4 3.1 8.8 0 16-7.2 16-16V136h64v752z"></path></svg></i></span>
+                                        <%- post.categories.data[0].name %>
+                                    </a>
+                                </span>
+                                <% } %>
+        
+                                <span class="item-time">
+                                    <i aria-label="icon: calendar" class="anticon anticon-calendar"><svg viewBox="64 64 896 896" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></i>
+                                    <%- date(post.date, 'YYYY/M/D') %>
+                                </span>
+                            </div>
+        
+                            <% if(post.tags && post.tags.data.length!=0){ %>
+                            <div class="tags">
+                                <% post.tags.data.forEach(function(data){%>
+                                <span class="tag">
+                                    <% 
+                                           if(theme.style == "night"){
+                                                var color = ['color:#607d8b', 'color:#6484be', 'color:#006674','color:#016a99']
+                                            }else if(theme.style == "maiden"){
+                                                var color = ['color:#ffa2c4', 'color:#00bcd4', 'color:#879cff', 'color:#1bccbc', 'color:#ff7d73'];
+                                            }else{
+                                                var color = ['color:#ffa2c4', 'color:#00bcd4', 'color:#03a9f4', 'color:#00a596', 'color:#ff7d73'];
+                                            }
+                                            var num = Math.floor(Math.random()*color.length);
+                                        %>
+                                    <a href="<%- rootlink %>tags/<%= data.name.replace(" ", "-") %>" style=<%- color[num] %>>
+                                        <%- data.name %>
+                                    </a>
+                                </span>
+                                <% }) %>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+        <% }) %>
+        <a class="uico waves-effect waves-light" href="#cat">
+            <div class="co_main">该分类项目已到底了</div>
+            <div class="co_sub">向上拉或者点击此处返回分类列表</div>
+        </a>
+    </div>
+</div>

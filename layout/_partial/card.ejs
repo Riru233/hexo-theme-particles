@@ -1,0 +1,88 @@
+<!--程序:时间组件-->
+<div class="notify-style timedate ant-card ant-card-bordered">
+    <div class="ant-card-body">
+        <div id="bjtime" style="font-weight:lighter;font-size:50px"></div>
+        <div id="bjdate" style="font-size:20px"></div>
+    </div>
+</div>
+<!--程序:个人信息-->
+<div class="card-style ant-card ant-card-bordered" id="profileinfo">
+    <div class="ant-card-body">
+        <div class="avatar">
+            <img src="<%- theme.head_img %> " alt="头像">
+        </div>
+        <div class="name">
+            <%- config.author %>
+        </div>
+        <div class="descriptions">
+            <% theme.card.description.forEach(function(desc){ %>
+                <div class="description">
+                    <%- desc %>
+                </div>
+                <% }) %>
+        </div>
+        <div class="icon-links">
+            <% Object.keys(theme.card.icon_links).forEach(function(key){ %>
+                <span class="icon-link">
+                    <a href="<%- theme.card.icon_links[key].link %>">
+                        <svg viewBox="<%- theme.card.icon_links[key].icon.viewBox %>" width="<%- theme.card.icon_links[key].icon.width %>" height=<%- theme.card.icon_links[key].icon.height %> fill="currentColor" aria-hidden="true" focusable="false"><path d="<%- theme.card.icon_links[key].icon.data %>"></path></svg>
+                    </a>
+                </span>
+                <% }) %>
+        </div>
+    </div>
+</div>
+
+<!--程序:相关链接-->
+<div class="card-style ant-card ant-card-bordered" id="fr-link">
+    <div class="ant-card-body">
+        <div class="name">
+            友情链接
+        </div>
+        <div class="friend-links" style="overflow-y: scroll;height:200px;">
+            <% Object.keys(theme.card.friend_links).forEach(function(key){ %>
+                <div class="friend-link">
+                    <a href="<%- theme.card.friend_links[key] %>">
+                        <%- key %>
+                    </a>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</div>
+<div class="co_main">通知</div>
+<!-- 程序:漫展信息 -->
+<div class="notify-style timedate ant-card ant-card-bordered" style="cursor: pointer;" onclick="window.location.href='https://show.bilibili.com/platform/detail.html?id=69694&from=pc_search_sug'">
+    <div class="ant-card-body">
+        <div class="co_main" style="font-size:14px;font-weight: bolder;">漫展Push <span style="color: #666666;font-size: 10px;">· 2022/11/24 17:58</span></div>
+        <div class="co_sub" style="font-size:12px;font-weight: normal;">海南星火熠熠动漫嘉年华</div>
+        <div class="co_sub" style="font-size:12px;font-weight: normal;">日期:[22]12.31~[23]1.1</div>
+        <div class="co_sub" style="font-size:12px;font-weight: normal;">地点:海南省海口市友谊阳光城</div>
+        <div class="co_sub" style="font-size:12px;font-weight: normal;">好耶，终于能面基咯</div>
+    </div>
+</div>
+
+<script>
+    function getTime1() {
+        var date = new Date();
+        var hour = date.getHours(); //获取小时
+        hour = hour < 10 ? '0' + hour : hour;
+        var minute = date.getMinutes(); // 获取分
+        minute = minute < 10 ? '0' + minute : minute;
+        var seconds = date.getSeconds(); //获取秒
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        return hour + ':' + minute + ':' + seconds;
+    };
+    function getTime2() {
+        var date = new Date();
+        var year = date.getFullYear(); //获取年份
+        var month = date.getMonth() + 1; //获取月份
+        var day = date.getDate(); //获取日期
+        return year + '年' + month + '月' + day + '日&nbsp;';
+    };
+    setInterval(function() {
+        document.querySelector('#bjtime').innerHTML = getTime1();
+        document.querySelector('#bjdate').innerHTML = getTime2();
+    }, 1000);
+</script>
+

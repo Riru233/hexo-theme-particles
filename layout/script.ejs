@@ -1,0 +1,112 @@
+<script>
+    const App = Vue.createApp({
+        data() {
+            return {
+                showpage: false,
+                menushow: false,
+                cardtop: 100,
+                barlocal: 0,
+            };
+        },
+        created() {
+            let that = this;
+            window.addEventListener("load", () => {
+                that.showpage = true;
+                document.getElementById("loading").style.opacity = 0;
+                document.getElementById("loading").style.visibility = "hidden";
+            });
+        },
+        mounted() {
+            if (document.getElementById("home-head"))
+                document.getElementById("menu").className += " menu-color";
+            window.addEventListener("scroll", this.handleScroll, true);
+            let codes = document.getElementsByTagName("pre");
+            let copying = false;
+            for (let code of codes) {
+                const lang =
+                    code?.firstChild.className.split(/\s+/).filter(x => {
+                        return x != "sourceCode";
+                    })[0] || "text";
+            }
+        },
+        methods: {
+            home_click() {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: "smooth",
+                });
+            },
+            handleScroll() {
+                let newlocal = document.documentElement.scrollTop;
+                let menu = document.getElementById("menu");
+                let wrap = document.getElementById("home-posts-wrap");
+                let footer = document.getElementById("footer");
+                let that = this;
+                if (this.barlocal < newlocal) {
+                    menu.className = "hidden-menu";
+                    that.menushow = false;
+                } else menu.className = "show-menu";
+                if (wrap) {
+                    if (newlocal <= window.innerHeight - 100) menu.className += " menu-color";
+                    if (newlocal <= 400) {
+                        wrap.style.top = -newlocal / 5 + "px";
+                    } else if (wrap.style.top != "-80px" || footer.style.top != "70px") {
+                        wrap.style.top = "-70px";
+                    }
+                }
+                this.barlocal = newlocal;
+            },
+        },
+    });
+    App.mount("#layout");
+</script>
+
+
+<!--评论区-->
+<% if (theme.waline.enable && is_post()) { %>
+    <script src="https://cdn.staticfile.org/waline/2.9.1/waline.min.js"></script>
+    <script>
+        Waline.init({
+            el: '#waline-container',
+            serverURL: "<%- theme.waline.serverURL %>",
+            commentCount: <%- theme.waline.commentCount %>,
+            pageview: <%- theme.waline.pageview %>,
+            emoji: "<%- theme.waline.emoji %>".split(','),
+            meta: "<%- theme.waline.meta %>".split(','),
+            requiredMeta: "<%- theme.waline.requiredMeta %>".split(','),
+            lang: "<%- theme.waline.lang %>",
+            wordLimit: <%- theme.waline.wordLimit %>,
+            pageSize: "<%- theme.waline.pageSize %>",
+            login: "<%- theme.waline.login %>",
+            locale: <%- JSON.stringify(theme.waline.locale) %>
+        });
+    </script>
+    <% } %>
+<!-- 浏览进度功能实现 -->
+<script data-pjax>
+document.addEventListener('DOMContentLoaded', function () {
+    var winHeight = window.innerHeight,
+        docHeight = document.querySelector.scrollHeight,
+        progressBar = document.getElementById('insert');   //选定进度条
+    progressBar.max = docHeight - winHeight;
+    progressBar.value = window.scrollY;
+
+    document.addEventListener('scroll', function () {
+        progressBar.max = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.value = window.scrollY;
+        var insertDiv = document.getElementById("insert");
+        progress = (progressBar.value / progressBar.max) * 100 + 1 >> 0;
+        insertDiv.innerHTML = progress + "%";
+    });
+});
+</script>
+
+
+<!-- Materialize选项打开 -->
+<script>
+    $(document).ready(function(){
+        $('.tooltipped').tooltip();
+    });
+
+    $('.dropdown-trigger').dropdown();
+</script>

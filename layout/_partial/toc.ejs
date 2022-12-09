@@ -1,0 +1,7 @@
+<% var rootlink = config.root %> 
+<% if (page.toc != false) { %>
+    <div id="toc" class="toc_main">
+        <strong class="sidebar-title">目录</strong>
+        <%- toc(page.content, {list_number : false}) %>
+    </div>
+<% } %>

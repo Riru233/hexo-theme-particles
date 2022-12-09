@@ -1,0 +1,80 @@
+#modal1
+    background-color noti-background
+    backdrop-filter: blur(20px)
+    .modal-content
+        .title 
+            font-size 1.6rem
+            color text-font
+        p
+            color text-font
+    .modal-footer
+        background-color #0000
+        .modal-close
+            color default-link
+
+
+#searchInput
+    color text-font
+
+#searchModal 
+    background-color: noti-background
+    backdrop-filter: blur(20px)
+    min-height 500px
+    width 80%
+    .search-header .title 
+        font-size 1.6rem
+        color text-font
+
+    .model-trigger
+        color menu-default-font
+#searchResult 
+    margin -15px 0 10px 10px
+
+p
+    .search-result-summary
+        margin 15px 0 0 -8px
+
+.search-result-list
+    .search-result-title
+        font-size 1.4rem
+        color current-color
+    li 
+        border-bottom 1px solid #aeaeae
+        padding 15px 0 5px 0
+
+.search-result-list .search-keyword 
+    margin: 0 2px
+    padding: 1px 5px 1px 4px
+    border-radius 2px
+    background-color noti-background
+    color current-color
+    font-style normal
+    white-space pre-wrap
+
+#searchResult 
+    margin -15px 0 10px 10px
+    .search-result-list
+        margin-left -8px
+        margin-top 0px
+        padding-left 0
+        color text-font
+
+li
+     list-style none
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) 
+    border-bottom 1px solid current-color
+    -webkit-box-shadow 0 1px 0 0 current-color
+    box-shadow 0 1px 0 0 current-color

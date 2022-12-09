@@ -1,0 +1,19 @@
+<% var rootlink = config.root %> 
+<footer id="footer">
+    <div class="footer-wrap" style="z-index: 1;">
+        <div></div>
+        <div><a href="https://riru233.github.io/">Particle S主题</a>基于</div>
+        <div><a href="https://hexo.io/">Hexo引擎</a> 与 <a href="https://github.com/korilin/hexo-theme-particle">Particle主题</a> 深度定制</div>
+        <div>
+            Copyright <%= theme.footer.since %> - <%- date(Date.now(), 'YYYY') %> <%= config.title %> @ <%- config.author %>
+        </div>
+        <% if(theme.footer.ICP.enable){ %>
+        <div>
+            备案号：<a href="http://beian.miit.gov.cn/">
+                <%- theme.footer.ICP.code %>
+            </a>
+        </div>
+        <% } %>
+    </div>
+
+</footer>
