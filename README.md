@@ -2,6 +2,8 @@
 
 <font style="color:red;">由于本人备战考研，Particle S主题停更，但主题永久开放下载</font>
 
+[Hizunaの小窝](http://llxz.one:25354/index.php/stat.html)
+
 > 原作介绍:
 >
 > 介绍：hexo 主题 particle，诞生原因是因为建多了两个博客，所以自己开发了这个主题来作为 3个博客的主题
