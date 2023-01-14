@@ -1,5 +1,7 @@
 # 体验全新的Particle S主题
 
+<font style="color=red">由于本人备战考研，Particle S主题停更<font>
+
 > 原作介绍:
 >
 > 介绍：hexo 主题 particle，诞生原因是因为建多了两个博客，所以自己开发了这个主题来作为 3个博客的主题
