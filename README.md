@@ -1,6 +1,6 @@
 # 体验全新的Particle S主题
 
-<font style="color:red;">由于本人备战考研，Particle S主题停更，但主题永久开放下载</font>
+<font style="color:red;">Particle S主题将要复更，不再使用Material主题，改Ant Design，主题永久开放下载</font>
 
 [Hizunaの小窝](http://llxz.one:25354/index.php/stat.html)
 
